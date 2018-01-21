@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class rocket : MonoBehaviour {
 
+	private Rigidbody rigidBody;
+	[SerializeField]
+	private float turnSpeed = 100f;
+
 	// Use this for initialization
 	void Start () {
-		
+		rigidBody = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -16,17 +20,20 @@ public class rocket : MonoBehaviour {
 
 
 	private void ProcessInput(){
-		
+
+
+
 		if (Input.GetKey(KeyCode.Space)){
 			Debug.Log ("thrusting");
+			rigidBody.AddRelativeForce(new Vector3(0,55,0));
 		}
 
 		if (Input.GetKey(KeyCode.A)){
-			Debug.Log ("rotate left");
+			transform.Rotate (Vector3.forward*Time.deltaTime*turnSpeed);
 		}
 
 		else if (Input.GetKey(KeyCode.D)){
-			Debug.Log ("rotate right");
+			transform.Rotate (-Vector3.forward*Time.deltaTime*turnSpeed);
 		}
 
 	
