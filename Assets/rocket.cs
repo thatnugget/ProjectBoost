@@ -5,12 +5,15 @@ using UnityEngine;
 public class rocket : MonoBehaviour {
 
 	private Rigidbody rigidBody;
+	private AudioSource rocketSound;
 	[SerializeField]
 	private float turnSpeed = 100f;
 
 	// Use this for initialization
 	void Start () {
 		rigidBody = GetComponent<Rigidbody>();
+		rocketSound = GetComponent<AudioSource> ();
+		rocketSound.Pause();
 	}
 	
 	// Update is called once per frame
@@ -26,10 +29,12 @@ public class rocket : MonoBehaviour {
 		if (Input.GetKey(KeyCode.Space)){
 			Debug.Log ("thrusting");
 			rigidBody.AddRelativeForce(new Vector3(0,55,0));
+			rocketSound.Play ();
 		}
 
 		if (Input.GetKey(KeyCode.A)){
 			transform.Rotate (Vector3.forward*Time.deltaTime*turnSpeed);
+
 		}
 
 		else if (Input.GetKey(KeyCode.D)){
